@@ -1,0 +1,36 @@
+{
+  "seed": 42,
+  "data": {
+    "val_size": 0.1,
+    "batch_size": 64
+  },
+  "model": {
+    "type": "cnn",
+    "layers": [
+      {"type": "conv2d", "in_channels": 1, "out_channels": 8, "kernel": 3, "stride": 1, "padding": 0, "init": "he"},
+      {"type": "relu"},
+      {"type": "maxpool2d", "kernel": 2, "stride": 2},
+      {"type": "conv2d", "in_channels": 8, "out_channels": 16, "kernel": 3, "stride": 1, "padding": 0, "init": "he"},
+      {"type": "relu"},
+      {"type": "maxpool2d", "kernel": 2, "stride": 2},
+      {"type": "flatten"},
+      {"type": "dense", "in": 400, "out": 128, "init": "he", "activation": "relu"},
+      {"type": "dense", "in": 128, "out": 10, "init": "xavier", "activation": "softmax"}
+    ]
+  },
+  "training": {
+    "epochs": 15,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "betas": [0.9, 0.999],
+    "eps": 1e-8,
+    "l2": 0.0001,
+    "gradient_clip": 5.0,
+    "scheduler": {
+      "type": "cosine",
+      "t_max": 15,
+      "min_lr": 0.00001
+    },
+    "early_stopping_patience": 4
+  }
+}

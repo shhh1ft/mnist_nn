@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  mnist:
+    build: .
+    image: mnist_nn:latest
+    container_name: mnist_nn
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./benchmarks:/app/benchmarks
+    command: ["python", "-m", "scripts.run_all"]

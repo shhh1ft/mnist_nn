@@ -1,0 +1,32 @@
+{
+  "seed": 42,
+  "data": {
+    "val_size": 0.1,
+    "batch_size": 64
+  },
+  "model": {
+    "type": "mlp",
+    "layers": [
+      {"type": "dense", "in": 784, "out": 256, "init": "he", "activation": "relu"},
+      {"type": "dropout", "p": 0.3},
+      {"type": "dense", "in": 256, "out": 128, "init": "he", "activation": "relu"},
+      {"type": "dropout", "p": 0.2},
+      {"type": "dense", "in": 128, "out": 10, "init": "xavier", "activation": "softmax"}
+    ]
+  },
+  "training": {
+    "epochs": 30,
+    "optimizer": "adam",
+    "learning_rate": 0.001,
+    "betas": [0.9, 0.999],
+    "eps": 1e-8,
+    "l2": 0.0001,
+    "gradient_clip": 5.0,
+    "scheduler": {
+      "type": "cosine",
+      "t_max": 30,
+      "min_lr": 0.00001
+    },
+    "early_stopping_patience": 6
+  }
+}
